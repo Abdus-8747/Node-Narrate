@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("./partials/Head") %>
+    <title>Sign In - Node Narrate</title>
+    <style>
+        :root {
+            --node-green: #43853d;
+            --node-dark: #333333;
+            --node-light-green: #68a063;
+            --node-lighter-green: #8cc84b;
+            --node-black: #0a0a0a;
+            --node-gray: #999999;
+            --terminal-black: #0c0c0c;
+            --terminal-text: #cccccc;
+        }
+
+        body {
+            background-color: #0d1117;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            color: var(--terminal-text);
+        }
+
+        .node-container {
+            max-width: 550px;
+            margin: 3rem auto;
+            background-color: #161b22;
+            padding: 2rem;
+            border-radius: 6px;
+            border-top: 5px solid var(--node-light-green);
+            box-shadow: 0 4px 16px rgba(0, 255, 0, 0.15);
+            position: relative;
+        }
+
+        .terminal-header {
+            background-color: #0e0e0e;
+            color: var(--terminal-text);
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+            font-family: 'Consolas', 'Monaco', monospace;
+        }
+
+        .terminal-prompt {
+            color: var(--node-lighter-green);
+            margin-right: 0.5rem;
+        }
+
+        .terminal-cursor {
+            display: inline-block;
+            width: 0.6rem;
+            height: 1.2rem;
+            background-color: var(--terminal-text);
+            vertical-align: middle;
+            margin-left: 0.25rem;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .node-logo {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .node-logo img {
+            height: 80px;
+        }
+
+        .node-title {
+            color: var(--node-lighter-green);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1.75rem;
+            text-align: center;
+        }
+
+        .node-subtitle {
+            color: var(--node-gray);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        .form-control {
+            background-color: #0d1117;
+            color: #ffffff;
+            border: 1px solid #30363d;
+            border-radius: 4px;
+            padding: 0.6rem 0.75rem;
+            transition: all 0.2s;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+        }
+
+        .form-control::placeholder {
+            color: #7d8590;
+        }
+
+        .form-control:focus {
+            background-color: #0d1117;
+            color: #ffffff;
+            border-color: var(--node-light-green);
+            box-shadow: 0 0 0 0.2rem rgba(104, 160, 99, 0.25);
+        }
+
+        .form-label {
+            font-weight: 500;
+            color: #c9d1d9;
+        }
+
+        .btn-primary {
+            background-color: #43853d;
+            border: none;
+            color: white;
+            padding: 0.6rem 1.5rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--node-lighter-green);
+            color: white;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--node-gray);
+        }
+
+        .login-link a {
+            color: var(--node-light-green);
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        .backend-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: var(--node-light-green);
+            color: #000;
+            padding: 0.25rem 0.75rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0, 255, 0, 0.2);
+        }
+
+        .code-lines {
+            position: absolute;
+            left: 1rem;
+            top: 2rem;
+            bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            color: #3c3c3c;
+            font-size: 0.75rem;
+            font-family: monospace;
+        }
+
+        .code-brackets {
+            color: var(--node-lighter-green);
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <%- include("./partials/nav") %>
+
+    <div class="container mt-4">
+        <div class="node-container">
+            <div class="backend-badge">Terminal Access</div>
+            <div class="terminal-header">
+                <span class="terminal-prompt">$</span> npm login node-narrate
+                <span class="terminal-cursor"></span>
+            </div>
+
+            <div class="node-logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg" alt="Node.js Logo">
+            </div>
+
+            <h2 class="node-title"><span class="code-brackets">{</span> Welcome Back <span class="code-brackets">}</span></h2>
+            <p class="node-subtitle">Sign in to continue your journey</p>
+
+            <form action="/user/signup" method="post">
+                <div class="mb-3">
+                    <label for="fullName" class="form-label">Full Name</label>
+                    <input type="text" class="form-control" id="fullName" name="fullName" placeholder="console.log('Your Name')" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="dev@example.com" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="******" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">npm Create ACCOUNT</button>
+            </form>
+
+            <div class="login-link">
+                Don’t have an account? <a href="/user/signup">Register here</a>
+            </div>
+
+            <div class="code-lines">
+                <div>01</div>
+                <div>02</div>
+                <div>03</div>
+                <div>04</div>
+                <div>05</div>
+                <div>06</div>
+                <div>07</div>
+            </div>
+        </div>
+    </div>
+    <%- include("./partials/Footer") %>
+    <%- include("./partials/script") %>
+</body>
+
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("./partials/head") %>
+    <title>Add New Blog | Node Narrate</title>
+    <style>
+        body {
+            background-color: #0d1117;
+            color: #d0d0d0;
+            font-family: 'Fira Code', monospace;
+        }
+
+        h2 {
+            text-align: center;
+            color: #00ff7f;
+            margin-top: 30px;
+            text-shadow: 0 0 6px rgba(0, 255, 127, 0.4);
+        }
+
+        .form-label {
+            color: #00ffaa;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .form-control {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            color: #ffffff;
+            font-family: 'Fira Code', monospace;
+        }
+
+        .form-control:focus {
+            background-color: #161b22;
+            color: #ffffff;
+            box-shadow: 0 0 0 0.15rem rgba(0, 255, 127, 0.25);
+            border-color: #00ff7f;
+        }
+
+        .btn-primary {
+            background-color: #00ff7f;
+            border-color: #00ff7f;
+            color: #0d1117;
+            font-weight: bold;
+            font-family: 'Fira Code', monospace;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #00ffaa;
+            border-color: #00ffaa;
+            color: #0d1117;
+            box-shadow: 0 0 8px rgba(0, 255, 127, 0.5);
+        }
+
+        form {
+            background-color: #161b22;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 12px rgba(0, 255, 127, 0.05);
+        }
+    </style>
+</head>
+<body>
+    <%- include("./partials/nav") %>
+
+    <h2>Add Blog to Node Narrate</h2>
+
+    <div class="container mt-4 mb-5" style="max-width: 1000px;">
+        <form action="/blog" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="coverImage" class="form-label">Cover Image</label>
+                <input type="file" class="form-control" id="coverImage" name="coverImage" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" id="title" name="title" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="body" class="form-label">Content</label>
+                <textarea class="form-control" id="body" name="body" rows="8" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    <%- include("./partials/Footer") %>
+    <%- include("./partials/script") %>
+</body>
+</html>

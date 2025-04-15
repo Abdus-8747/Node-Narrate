@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("./partials/head") %>
+    <title>SignIn - Node Narrate</title>
+    <style>
+        :root {
+            --node-green: #43853d;
+            --node-dark: #333333;
+            --node-light-green: #68a063;
+            --node-lighter-green: #8cc84b;
+            --node-black: #222222;
+            --node-gray: #666666;
+            --node-light-gray: #f0f0f0;
+            --terminal-black: #0c0c0c;
+            --terminal-text: #cccccc;
+        }
+
+        body {
+            background-color: #0d1117;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            color: var(--terminal-text);
+        }
+
+        .node-container {
+            max-width: 500px;
+            margin: 2rem auto;
+            background-color: #161b22;
+            padding: 2rem;
+            border-radius: 6px;
+            box-shadow: 0 4px 16px rgba(0, 255, 127, 0.15);
+            border-top: 5px solid var(--node-lighter-green);
+            position: relative;
+        }
+
+        .terminal-header {
+            background-color: var(--terminal-black);
+            color: var(--terminal-text);
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+            font-family: 'Consolas', 'Monaco', monospace;
+            position: relative;
+        }
+
+        .terminal-prompt {
+            display: inline-block;
+            color: var(--node-lighter-green);
+            margin-right: 0.5rem;
+        }
+
+        .terminal-cursor {
+            display: inline-block;
+            width: 0.6rem;
+            height: 1.2rem;
+            background-color: var(--terminal-text);
+            vertical-align: middle;
+            margin-left: 0.25rem;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .node-logo {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .node-logo img {
+            height: 80px;
+            width: auto;
+        }
+
+        .node-title {
+            color: var(--node-lighter-green);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1.75rem;
+            text-align: center;
+        }
+
+        .node-subtitle {
+            color: #8b949e;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        .form-control {
+            background-color: #0d1117;
+            color: #ffffff;
+            border: 1px solid #30363d;
+            border-radius: 4px;
+            padding: 0.6rem 0.75rem;
+            transition: all 0.2s;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+        }
+
+        .form-control::placeholder {
+            color: #7d8590;
+        }
+
+        .form-control:focus {
+            background-color: #0d1117;
+            color: #ffffff;
+            border-color: var(--node-light-green);
+            box-shadow: 0 0 0 0.2rem rgba(104, 160, 99, 0.25);
+        }
+
+        .form-label {
+            font-weight: 500;
+            color: #c9d1d9;
+        }
+
+        .btn-primary {
+            background-color: var(--node-green);
+            border-color: var(--node-green);
+            padding: 0.6rem 1.5rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            color: white;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background-color: #8cc84b;
+            border-color: var(--node-dark);
+        }
+
+        .form-text {
+            color: #6e7681;
+            font-size: 0.85rem;
+        }
+
+        .backend-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: var(--node-lighter-green);
+            color: #0d1117;
+            padding: 0.25rem 0.75rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .code-brackets {
+            color: var(--node-lighter-green);
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: #8b949e;
+        }
+
+        .signup-link a {
+            color: var(--node-light-green);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        .node-pattern {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-image:
+                radial-gradient(#21262d 1px, transparent 1px),
+                radial-gradient(#21262d 1px, transparent 1px);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            opacity: 0.2;
+            z-index: -1;
+            border-radius: 6px;
+        }
+
+        .form-check-input:checked {
+            background-color: var(--node-green);
+            border-color: var(--node-green);
+        }
+    </style>
+</head>
+
+<body>
+    <%- include("./partials/nav") %>
+
+    <div class="container mt-4">
+        <div class="node-container">
+            <div class="node-pattern"></div>
+            <div class="backend-badge">Node.js</div>
+
+            <div class="terminal-header">
+                <span class="terminal-prompt">$</span>
+                node login.js
+                <span class="terminal-cursor"></span>
+            </div>
+
+            <div class="node-logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg" alt="Node.js Logo">
+            </div>
+
+            <h2 class="node-title"><span class="code-brackets">{</span> Login <span class="code-brackets">}</span></h2>
+            <p class="node-subtitle">Access your Node Narrate account</p>
+
+            <form action="/user/signin" method="post">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="developer@example.com" required>
+                    <div id="emailHelp" class="form-text">// We'll never share your email with anyone else</div>
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter your secure password" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">require('./access')</button>
+            </form>
+
+            <div class="signup-link">
+                Don't have an account? <a href="/user/signup">Sign up</a>
+            </div>
+        </div>
+    </div>
+    <%- include("./partials/Footer") %>
+    <%- include("./partials/script") %>
+</body>
+
+</html>

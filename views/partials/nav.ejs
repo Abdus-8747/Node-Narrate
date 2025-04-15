@@ -1,0 +1,109 @@
+<style>
+    .custom-navbar {
+        background-color: rgba(1, 4, 9, 0.9);
+        border-bottom: 1px solid #30363d;
+        backdrop-filter: blur(10px);
+        padding: 0.8rem 1rem;
+        box-shadow: 0 0 12px rgba(0, 255, 127, 0.05);
+    }
+
+    .custom-navbar .navbar-brand {
+        color: #00ff7f;
+        font-family: 'Fira Code', monospace;
+        font-size: 1.4rem;
+        font-weight: bold;
+        transition: color 0.2s ease;
+    }
+
+    .custom-navbar .navbar-brand:hover {
+        color: #00ffaa;
+    }
+
+    .custom-navbar .nav-link {
+        color: #d0d0d0;
+        font-family: 'Fira Code', monospace;
+        margin-left: 1rem;
+        transition: color 0.2s ease, text-shadow 0.2s ease;
+    }
+
+    .custom-navbar .nav-link:hover {
+        color: #00ff7f;
+        text-shadow: 0 0 5px rgba(0, 255, 127, 0.8);
+    }
+
+    .custom-navbar .dropdown-menu {
+        background-color: #0d1117;
+        border: 1px solid #30363d;
+        border-radius: 8px;
+    }
+
+    .custom-navbar .dropdown-item {
+        color: #d0d0d0;
+        font-family: 'Fira Code', monospace;
+    }
+
+    .custom-navbar .dropdown-item:hover {
+        background-color: #00ff7f;
+        color: #0d1117;
+    }
+
+    .custom-navbar .navbar-toggler {
+        background-color: #00ff7f;
+    }
+
+    .alert-danger {
+        background-color: #ff4d4d;
+        color: #0d1117;
+        font-weight: bold;
+        border: none;
+        box-shadow: 0 0 8px rgba(255, 77, 77, 0.7);
+        font-family: 'Fira Code', monospace;
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg custom-navbar">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Node Narrate</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+
+                <% if (locals.user) { %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog/add-new">Add Blog</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <%= locals.user.fullName %>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/user/logout">Logout</a></li>
+                        </ul>
+                    </li>
+                <% } else { %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/signup">Create Account</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/signin">Login</a>
+                    </li>
+                <% } %>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<% if (locals.error) { %>
+    <div class="container mt-3">
+        <div class="alert alert-danger" role="alert">
+            <%= locals.error %>
+        </div>
+    </div>
+<% } %>
